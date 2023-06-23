@@ -1,0 +1,11 @@
+{
+  "name": "ecommercegama",
+  "version": "1.0.0",
+  "description": "Creating an ecormmer mvp",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "grupo1",
+  "license": "ISC"
+}
