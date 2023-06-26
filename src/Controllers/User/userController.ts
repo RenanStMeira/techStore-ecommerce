@@ -8,7 +8,7 @@ export class UserController {
         const { name, email, password } = req.body;
 
         try {
-            prisma.users.createUser({
+            prisma.user.create({
                 data: {
                     name,
                     email,
@@ -21,5 +21,31 @@ export class UserController {
         } catch (err) {
             res.status(500).json({ message: 'Error creating user' });
         }
-    }
+     };
+
+     async listUsers(req: Request, res: Response) {
+        try {
+            const users = await prisma.user.findMany();
+
+            res.status(200).json(users);
+        } catch (err) {
+            res.status(500).json({ Message: 'Error retrieving users' });
+        }
+     };
+
+     async deleteUser(req: Request, res: Response){
+        const { id } = req.params;
+
+        try {
+            await prisma.user.delete({
+                where: {
+                    id: String(id),
+                }
+            });
+
+            res.status(200).json({ message: 'User deleted succesfully' });
+        } catch (err) {
+            res.status(500).json({ message: 'Error deleting user' })
+        }
+     }
 };

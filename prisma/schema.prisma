@@ -16,6 +16,8 @@ model User {
   name String
   email String @unique
   password String
+  createAdt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@map("user")
 }
