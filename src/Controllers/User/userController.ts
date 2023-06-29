@@ -3,7 +3,6 @@ import { PrismaClient } from "@prisma/client";
 import bcrypt from 'bcrypt';
 import  Jwt from "jsonwebtoken";
 
-
 const prisma = new PrismaClient();
 export class UserController {
     async createUser(req: Request, res: Response){
@@ -92,7 +91,7 @@ export class UserController {
                  res.status(404).json({ message: 'Usuario não encontrado' })
             }
                } catch {
-            res.status(500).json({ message: 'Erro do Servidor Interno' })
+            res.status(500).json({ message: 'Erro no Servidor Interno' })
         }
      };
 
@@ -107,9 +106,9 @@ export class UserController {
                 }
             });
 
-            res.status(200).json({ message: 'User deleted succesfully' });
+            res.status(200).json({ message: 'Usuario deletado com sucesso deleted succesfully' });
         } catch (err) {
-            res.status(500).json({ message: 'Error deleting user' })
+            res.status(500).json({ message: 'Erro ao deletar usuario' })
         }
      }
 };

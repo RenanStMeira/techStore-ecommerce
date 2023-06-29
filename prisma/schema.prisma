@@ -10,7 +10,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-//model para criação de usuario
 model User {
   id String @id @default(uuid())
   name String
