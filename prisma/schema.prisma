@@ -22,3 +22,14 @@ model User {
   @@map("user")
 }
 
+model Admin {
+  id String @id @default(uuid())
+  name String
+  email String
+  password String
+  isAdmin Boolean
+  createAdt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("admin")
+}
