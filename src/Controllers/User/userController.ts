@@ -9,29 +9,44 @@ export class UserController {
     async createUser(req: Request, res: Response){
         const { name, email, password } = req.body;
 
+        const hash = await bcrypt.hash(password, 10);
+
         try {
-           await prisma.user.create({
+          const newUser = await prisma.user.create({
                 data: {
                     name,
                     email,
-                    password
+                    password: hash,
                 },
             });
 
-            res.status(201).json({ message: 'User created successfully' });
+            const {password: _, ...user} = newUser;
+
+            res.status(201).json({ message: 'Usuario criado com sucesso', user });
 
         } catch (err) {
-            res.status(500).json({ message: 'Error creating user' });
+            res.status(500).json({ message: 'Erro ao criar usuario' });
         }
      };
 
      async listUsers(req: Request, res: Response) {
-        try {
-            const users = await prisma.user.findMany();
+        const { id } = req.params;
 
-            res.status(200).json(users);
-        } catch (err) {
-            res.status(500).json({ Message: 'Error retrieving users' });
+        try {
+            const users = await prisma.user.findUnique({
+                where: {
+                    id: id,
+                }
+            });
+
+            if (users){
+                res.json(users);
+
+            }else {
+                 res.status(404).json({ message: 'Usuario não encontrado' })
+            }
+               } catch {
+            res.status(500).json({ message: 'Erro do Servidor Interno' })
         }
      };
 
