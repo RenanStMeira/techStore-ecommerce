@@ -25,9 +25,14 @@ https://www.prisma.io/
 **Initialize a migration**
 npx prisma migrate save --name 
 
-**JWT**
-https://www.npmjs.com/package/jwt
+**BCRYPT**
+https://www.npmjs.com/package/bcryptjs
 * yarn add jsonwebtoken
 **bcrypt**
 * yarn add bcrypt
+
+**JWT**
+https://jwt.io/
+* yarn add jsonwebtoken
+* yarn add @types/jsonwebtoken --dev
 
