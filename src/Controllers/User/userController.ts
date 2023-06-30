@@ -55,7 +55,7 @@ export class UserController {
 
             //jwt
             //Gerar o token JWT com base no ID do usuário, chave secreta do JWT definida no ambiente e opções de expiração
-            const token = Jwt.sign({ id: users.id }, process.env.JWT_PASS, {expiresIn: '7h'})
+            const token = Jwt.sign({ id: users.id }, process.env.JWT_PASS, {expiresIn: '1h'})
 
             //Desestrutura o password para ignorar o password
             const { password:_, ...userLogin } = users;
