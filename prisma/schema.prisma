@@ -24,7 +24,7 @@ model User {
 model Admin {
   id String @id @default(uuid())
   name String
-  email String
+  email String @unique
   password String
   isAdmin Boolean
   createAdt DateTime @default(now())

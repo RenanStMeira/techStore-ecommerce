@@ -1,9 +1,12 @@
 import jwt from 'jsonwebtoken';
 
-function generateToken(payload: any) {
-  // Gerar o token JWT com base no payload fornecido e na chave secreta definida no ambiente
-  const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' });
+export function generateToken(payload: any): string {
+  const token = jwt.sign(payload, process.env.JWT_PASS, { expiresIn: '1h' });
   return token;
+  
 }
 
-export { generateToken };
+export function verifyToken(token: string): any {
+  const decoded = jwt.verify(token, process.env.JWT_PASS);
+  return decoded;
+}

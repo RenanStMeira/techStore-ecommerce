@@ -22,5 +22,7 @@ router.get('/admin/:id', adminController.listAdmin);
 router.post('/admin/create',adminController.createAdmin);
 router.delete('/admin/delete/:id', adminController.deleteAdmin);
 
+//Login Admin
+router.post('/admin/login',adminController.loginAdmin);
 
 export default router;
