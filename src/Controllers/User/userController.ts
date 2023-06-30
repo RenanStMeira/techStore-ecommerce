@@ -2,6 +2,8 @@ import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from 'bcrypt';
 import  Jwt from "jsonwebtoken";
+import { generateToken } from "../../Utils/jwtUtils";
+
 
 const prisma = new PrismaClient();
 export class UserController {
@@ -55,7 +57,9 @@ export class UserController {
 
             //jwt
             //Gerar o token JWT com base no ID do usuário, chave secreta do JWT definida no ambiente e opções de expiração
-            const token = Jwt.sign({ id: users.id }, process.env.JWT_PASS, {expiresIn: '7h'})
+            // const token = Jwt.sign({ id: users.id }, process.env.JWT_PASS, {expiresIn: '1h'})
+            // Gerar o token JWT com base no ID do usuário
+            const token = generateToken({ id: users.id });
 
             //Desestrutura o password para ignorar o password
             const { password:_, ...userLogin } = users;
