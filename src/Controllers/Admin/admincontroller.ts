@@ -4,8 +4,6 @@ import bcrypt from 'bcrypt';
 import  Jwt from "jsonwebtoken";
 import { generateToken } from "../../Utils/jwtUtils";
 
-
-
 const prisma = new PrismaClient();
 
 export class AdminController {
