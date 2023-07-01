@@ -34,70 +34,44 @@ export class UserController {
      };
 
 
-     async login(req: Request, res: Response){
+     async login(req: Request, res: Response) {
         const { email, password } = req.body;
-
-        try{
-            // Procurando o usuário no banco de dados
-            const users = await prisma.user.findUnique({
-                where:{ email },
-            });
-
-            if(!users) {
-                return res.status(404).json({ message: "Usuario não encontrado" });
-            }
-
-            //comparando a senha fornecida com a senha armazenada do banco de dados
-            const isPasswordValid = await bcrypt.compare(password, users.password);
-
-            //Verificar se a senha é valida
-            if (!isPasswordValid) {
-                return res.status(401).json({ message: 'Senha incorreta' })
-            }
-
-            //jwt
-            //Gerar o token JWT com base no ID do usuário, chave secreta do JWT definida no ambiente e opções de expiração
-            // const token = Jwt.sign({ id: users.id }, process.env.JWT_PASS, {expiresIn: '1h'})
-            // Gerar o token JWT com base no ID do usuário
-            const token = generateToken({ id: users.id });
-
-            //Desestrutura o password para ignorar o password
-            const { password:_, ...userLogin } = users;
-
-            return res.json({
-                user: userLogin,
-                token: token,
-            });
-
-
-        }catch (err) {
-            console.error('Erro ao fazer login:', err);
-            res.status(500).json({ message: 'Erro ao fazer login' });
-        }
-     }
-
-     async listUsers(req: Request, res: Response) {
-        const { id } = req.params;
-
+      
         try {
-            // Buscando o usuário pelo ID no banco de dados
-            const users = await prisma.user.findUnique({
-                where: {
-                    id: id,
-                }
-            });
-
-            if (users){
-                // Retornando o usuário encontrado
-                res.json(users);
-
-            }else {
-                 res.status(404).json({ message: 'Usuario não encontrado' })
-            }
-               } catch {
-            res.status(500).json({ message: 'Erro no Servidor Interno' })
+          // Procurando o usuário no banco de dados
+          const user = await prisma.user.findUnique({
+            where: { email },
+          });
+      
+          if (!user) {
+            return res.status(404).json({ message: "Usuário não encontrado" });
+          }
+      
+          // Comparando a senha fornecida com a senha armazenada no banco de dados
+          const isPasswordValid = await bcrypt.compare(password, user.password);
+      
+          // Verificar se a senha é válida
+          if (!isPasswordValid) {
+            return res.status(401).json({ message: 'Senha incorreta' });
+          }
+      
+          // Gerar o token JWT com base no ID do usuário
+          const token = generateToken({ id: user.id });
+      
+          // Remover a senha do objeto do usuário
+          const userWithoutPassword = { ...user };
+          delete userWithoutPassword.password;
+      
+          return res.json({
+            user: userWithoutPassword,
+            token: token,
+          });
+        } catch (err) {
+          console.error('Erro ao fazer login:', err);
+          res.status(500).json({ message: 'Erro ao fazer login' });
         }
-     };
+      }
+      
 
      async deleteUser(req: Request, res: Response){
         const { id } = req.params;
