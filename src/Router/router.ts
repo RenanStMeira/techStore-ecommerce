@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { UserController } from "../Controllers/User/userController";
 import { AdminController } from "../Controllers/Admin/admincontroller";
+import { cartController } from "../Controllers/cart/cartController";
 import { LoginController } from "../Auth/LoginUsers/authLoginUser";
 import { LoginAdmincontroller } from "../Auth/LoginAdmin/authLoginAdmin";
 
@@ -9,6 +10,8 @@ const router = Router();
 const userController = new UserController();
 
 const adminController = new AdminController();
+
+const cartControllers = new cartController()
 
 const loginUsercontroller = new LoginController();
 
@@ -31,5 +34,11 @@ router.delete('/admin/delete/:id', adminController.deleteAdmin);
 
 //Login Admin
 router.post('/admin/login',loginAdminController.loginAdmin);
+
+//Rotas de Cart
+router.get('/cart/list', cartControllers.listCarts) // Todos os carts criados
+router.post('/cart/historico', cartControllers.cartHistory) //Histórico de carts do usuário
+router.post('/cart/create', cartControllers.createCart)
+router.delete('/cart/delete/:id', cartControllers.deleteCart)
 
 export default router;
