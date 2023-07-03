@@ -1,8 +1,9 @@
 import { Router } from "express";
 import { UserController } from "../Controllers/User/userController";
-import { AdminController } from "../Controllers/Admin/admincontroller";
+import { AdminController } from "../Controllers/Admin/adminController";
 import { LoginController } from "../Auth/LoginUsers/authLoginUser";
 import { LoginAdmincontroller } from "../Auth/LoginAdmin/authLoginAdmin";
+import { PaymentController } from '../Service/ControllerPay/serviceControllerPay'
 
 const router = Router();
 
@@ -13,6 +14,8 @@ const adminController = new AdminController();
 const loginUsercontroller = new LoginController();
 
 const loginAdminController = new LoginAdmincontroller();
+
+const paymentController = new PaymentController();
 
 
 //Rotas de Usuarios
@@ -31,5 +34,9 @@ router.delete('/admin/delete/:id', adminController.deleteAdmin);
 
 //Login Admin
 router.post('/admin/login',loginAdminController.loginAdmin);
+
+//Pagamento Mercado Pago
+router.post('/pay',paymentController.create);
+
 
 export default router;

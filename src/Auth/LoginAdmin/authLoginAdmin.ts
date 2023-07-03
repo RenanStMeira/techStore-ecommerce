@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import bcrypt from 'bcrypt';
 import  Jwt from "jsonwebtoken";
-import { generateToken } from "../../Utils/jwtUtils";
+import { generateToken } from "../../Middlewares/jwtUtils";
 import { prisma } from "../../Service/Prisma/prismaService";
 
 export class LoginAdmincontroller {
