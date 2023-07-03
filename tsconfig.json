@@ -22,6 +22,7 @@
   },
   "include": [
     "src/**/*.ts",
-    "middlewares/**/*.ts"
+    "middlewares/**/*.ts",
+    "path/to/admincontroller.ts"
   ]
 }
