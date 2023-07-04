@@ -2,6 +2,7 @@ import { PrismaClient } from '@prisma/client';
 import { Request, Response } from 'express';
 import { UserController } from '../Controllers/User/userController';
 import { mock } from 'ts-mockito';
+import { randomUUID } from 'node:crypto'
 
 const prismaMock = mock(PrismaClient);
 
@@ -16,9 +17,13 @@ describe('UserController', () => {
     // Função executada antes de cada teste
     beforeEach(() => {
       userController = new UserController(); // Instanciando o UserController
-      req = {} as Request; //Criando um objeto que realiza a requisição
-      res = {} as Response; // Criando um objeto vazio que simula a resposta
-      prisma = new PrismaClient(); // Inicializando o cliente do Prisma
+
+      //Criando um objeto que realiza a requisição
+      req = {} as Request;
+      // Criando um objeto vazio que simula a resposta
+      res = {} as Response; 
+       // Inicializando o cliente do Prisma
+      prisma = new PrismaClient();
     });
   
     // Função executada após todos os testes
@@ -32,7 +37,7 @@ describe('UserController', () => {
          // Definindo os dados do corpo da requisição
         req.body = {
           name: 'Test User',
-          email: 'test@example.com',
+          email:` test${randomUUID()}@example.com`,
           password: '123456',
         };
   
@@ -40,12 +45,14 @@ describe('UserController', () => {
         res.json = jest.fn(); //Resposta com o uso do jest.fn()
   
          // Chamando a função createUser do UserController
-        await userController.createUser(req, res);
-  
+      const createUser = await userController.createUser(req, res);
+        
+      createUser.json({ user: 'jose' })
+
         // Verificando se a função status foi chamada com o código 201
         expect(res.status).toHaveBeenCalledWith(201);
         expect(res.json).toHaveBeenCalledWith({
-          message: 'User created successfully',
+          message: 'Usuario criado com sucesso',user:createUser.json
         });
       });
     });

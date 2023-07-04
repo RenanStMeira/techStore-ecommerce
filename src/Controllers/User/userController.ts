@@ -21,15 +21,19 @@ export class UserController {
                     email,
                     password: hash,
                 },
+                
             });
 
             // Omitindo a senha do objeto de usuário
             const {password: _, ...user} = newUser;
 
-            res.status(201).json({ message: 'Usuario criado com sucesso', user });
+            
+          return  res.status(201).json({ message: 'Usuario criado com sucesso', user });
 
         } catch (err) {
-            res.status(500).json({ message: 'Erro ao criar usuario' });
+
+          console.log(err)
+            res.status(400).json({ message: 'Erro ao criar usuario' });
         }
      };
 
@@ -68,7 +72,7 @@ export class UserController {
           });
         } catch (err) {
           console.error('Erro ao fazer login:', err);
-          res.status(500).json({ message: 'Erro ao fazer login' });
+          res.status(400).json({ message: 'Erro ao fazer login' });
         }
       }
       
@@ -86,7 +90,7 @@ export class UserController {
 
             res.status(200).json({ message: 'Usuario deletado com sucesso deleted succesfully' });
         } catch (err) {
-            res.status(500).json({ message: 'Erro ao deletar usuario' })
+            res.status(400).json({ message: 'Erro ao deletar usuario' })
         }
      }
 };
