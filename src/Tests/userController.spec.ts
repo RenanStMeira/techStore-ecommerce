@@ -1,6 +1,9 @@
 import { PrismaClient } from '@prisma/client';
 import { Request, Response } from 'express';
 import { UserController } from '../Controllers/User/userController';
+import { mock } from 'ts-mockito';
+
+const prismaMock = mock(PrismaClient);
 
 
 describe('UserController', () => {

@@ -9,7 +9,8 @@ const userController = new UserController();
 const adminController = new AdminController();
 
 //Rotas de Usuarios
-router.get("/users/:id", userController.listUsers);
+// router.get("/users/:id", userController.);clear
+
 router.post("/users/create", userController.createUser);
 router.delete('/users/delete/:id', userController.deleteUser);
 
