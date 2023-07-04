@@ -1,4 +1,4 @@
-import mercadopago from 'mercadopago'
+import mercadopago from 'mercadopago';
 import { config } from 'mercadopago';
 
 mercadopago.configure({
