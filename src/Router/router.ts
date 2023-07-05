@@ -5,6 +5,7 @@ import { LoginController } from "../Auth/LoginUsers/authLoginUser";
 import { LoginAdmincontroller } from "../Auth/LoginAdmin/authLoginAdmin";
 // import { PaymentController } from '../Service/ControllerPay/serviceControllerPay'
 import { ProductController } from "../Controllers/Products/productController";
+import { UploadMulter } from "../Core/uploadConfigCore";
 
 const router = Router();
 
@@ -15,6 +16,8 @@ const adminController = new AdminController();
 const loginUsercontroller = new LoginController();
 
 const loginAdminController = new LoginAdmincontroller();
+
+const uploadMulter = new UploadMulter();
 
 const productController = new ProductController();
 
@@ -40,6 +43,9 @@ router.post('/admin/login',loginAdminController.loginAdmin);
 
 //Produtos
 router.post('/product/created',productController.create);
+
+//upload de imagens
+router.post('/upload/image', uploadMulter.guard('uploads/image'), productController.upload);
 
 //Pagamento Mercado Pago
 // router.post('/pay',paymentController.create);

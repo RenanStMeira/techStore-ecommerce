@@ -14,14 +14,17 @@ export class ProductController {
           brand,
           model,
           description,
-          image: req.body.image
+          image,
         },
       });
 
-      res.status(201).json({ message: "Produto cadastrado com sucesso", product: createdProduct });
+     return res.status(201).json({ message: "Produto cadastrado com sucesso", product: createdProduct });
     } catch (error) {
       console.log(error);
       res.status(400).json({ message: "Erro ao cadastrar produto" });
     }
+  }
+  upload(req: Request, res: Response) {
+    return res.json({ message: 'Imagem cadastrada com sucesso' })
   }
 }
