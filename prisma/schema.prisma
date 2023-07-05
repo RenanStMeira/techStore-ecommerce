@@ -32,3 +32,17 @@ model Admin {
 
   @@map("admin")
 }
+
+
+model Product {
+  id String @id @default(uuid())
+  name String
+  brand String
+  model String
+  description String
+  image String?
+  createAdt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("product")
+}
