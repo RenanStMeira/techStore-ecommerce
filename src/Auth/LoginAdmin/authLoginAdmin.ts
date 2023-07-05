@@ -45,7 +45,7 @@ export class LoginAdmincontroller {
 
     } catch (error) {
       console.error('Erro ao fazer login do admin:', error);
-      res.status(500).json({ message: 'Erro ao fazer login do admin' });
+      res.status(401).json({ message: 'Erro ao fazer login do admin' });
     }
   }
 }

@@ -45,7 +45,7 @@ async login(req: Request, res: Response){
 
     } catch (err) {
         console.error('Erro ao fazer login:', err);
-        res.status(500).json({ message: 'Erro ao fazer login' });
+        res.status(400).json({ message: 'Erro ao fazer login' });
     }
 }
 
