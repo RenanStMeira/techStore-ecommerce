@@ -37,7 +37,18 @@ export class UserController {
         }
      };
 
+     async findAll(req: Request, res: Response) {
 
+      try {
+        const users = await prisma.user.findMany();
+        return res.status(200).json(users);
+
+      } catch (err) {
+
+        return res.status(400).json({ message: 'Erro ao buscar usuários' });
+      }
+    }
+  
      async login(req: Request, res: Response) {
         const { email, password } = req.body;
       
