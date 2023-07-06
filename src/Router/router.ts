@@ -1,3 +1,4 @@
+import { Request, Response } from "express";
 import { Router } from "express";
 import { UserController } from "../Controllers/User/userController";
 import { AdminController } from "../Controllers/Admin/adminController";
@@ -49,6 +50,14 @@ router.delete('/product/created',productController.delete);
 
 //upload de imagens
 router.post('/upload/image', uploadMulter.guard('uploads/image'), productController.upload);
+
+
+
+router.get('/', (req: Request, res: Response) => {
+    res.json('api rodando');
+  });
+
+
 
 //Pagamento Mercado Pago
 // router.post('/pay',paymentController.create);
