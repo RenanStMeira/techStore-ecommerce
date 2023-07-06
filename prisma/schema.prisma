@@ -11,18 +11,30 @@ datasource db {
 }
 
 model Product {
-  id String  @id @default(uuid())
+  id String @id @default(uuid())
   name String
+  price String
   brand String
   model String
   description String
   image String?
-  createAdt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  users User[]  @relation("ProductUser")
+  category Categories[]
+  createAdt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  users User[] @relation("ProductUser")
 
   @@map("product")
 }
+
+model Categories {
+  id String @id @default(uuid())
+  title String
+  productId String?
+  product Product? @relation(fields: [productId], references: [id])
+
+  @@map("categories")
+}
+
 
 model User {
   id String   @id @default(uuid())
