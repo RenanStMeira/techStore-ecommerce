@@ -80,28 +80,25 @@ export class AdminController {
           res.status(500).json({ message: 'Erro ao fazer login do admin' });
         }
       }
-      
-      
 
-    async listAdmin(req: Request, res: Response){
+      async listAdmin(req: Request, res: Response) {
         const { id } = req.params;
-        try{
-            const admin = await prisma.admin.findUnique({
-                where: {
-                    id: id, 
-                }
-            });
-
-            if (admin){
-                res.json(admin);
-
-            }else {
-                 res.status(404).json({ message: 'Admin não encontrado' })
-            }
-               } catch {
-            res.status(500).json({ message: 'Erro do Servidor Interno' })
+        try {
+          const admin = await prisma.admin.findUnique({
+            where: {
+              id: id,
+            },
+          });
+      
+          if (admin) {
+            return res.json(admin);
+          }
+        } catch (error) {
+          console.log(error);
+          res.status(500).json({ message: "Error retrieving admin" });
         }
-    }
+      }
+      
 
    
 
