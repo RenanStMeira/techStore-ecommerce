@@ -45,10 +45,10 @@ export class UserController {
 
             if (users){
                 // Retornando o usuário encontrado
-                res.json(users);
+               return res.json(users);
 
             }else {
-                 res.status(404).json({ message: 'Usuario não encontrado' })
+               return res.status(404).json({ message: 'Usuario não encontrado' })
             }
                } catch {
             res.status(400).json({ message: 'Erro no Servidor Interno' })
@@ -66,9 +66,9 @@ export class UserController {
                 }
             });
 
-            res.status(200).json({ message: 'Usuario deletado com sucesso ' });
+           return res.status(200).json({ message: 'Usuario deletado com sucesso ' });
         } catch (err) {
-            res.status(400).json({ message: 'Erro ao deletar usuario' })
+            return res.status(400).json({ message: 'Erro ao deletar usuario' })
         }
      }
 };

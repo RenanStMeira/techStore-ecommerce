@@ -42,7 +42,10 @@ router.delete('/admin/delete/:id', adminController.deleteAdmin);
 router.post('/admin/login',loginAdminController.loginAdmin);
 
 //Produtos
+router.get('/product',productController.findAll);
 router.post('/product/created',productController.create);
+router.delete('/product/created',productController.delete);
+
 
 //upload de imagens
 router.post('/upload/image', uploadMulter.guard('uploads/image'), productController.upload);
