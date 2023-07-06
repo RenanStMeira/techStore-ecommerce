@@ -42,7 +42,7 @@ export class UserController {
                     id: id,
                 }
             });
-
+//
             if (users){
                 // Retornando o usuário encontrado
                return res.json(users);
