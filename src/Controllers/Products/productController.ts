@@ -5,12 +5,13 @@ const prisma = new PrismaClient();
 
 export class ProductController {
   async create(req: Request, res: Response) {
-    const { name, brand, model, description, image } = req.body;
+    const { name, price,brand, model, description, image } = req.body;
 
     try {
       const createdProduct = await prisma.product.create({
         data: {
           name,
+          price,
           brand,
           model,
           description,
