@@ -51,7 +51,7 @@ router.delete('/product/created',productController.delete);
 //upload de imagens
 router.post('/upload/image', uploadMulter.guard('uploads/image'), productController.upload);
 
-
+const port = process.env.PORT || 3000;
 
 router.get('/', (req: Request, res: Response) => {
     res.json('api rodando');
