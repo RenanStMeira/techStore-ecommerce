@@ -42,7 +42,7 @@ router.delete('/admin/delete/:id', adminController.deleteAdmin);
 router.post('/admin/login',loginAdminController.loginAdmin);
 
 //Produtos
-router.get('/product',productController.findAll);
+router.get('/product/:id',productController.findAll);
 router.post('/product/created',productController.create);
 router.delete('/product/created',productController.delete);
 
