@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,52 +8,59 @@ datasource db {
 }
 
 model Product {
-  id String @id @default(uuid())
-  name String
-  price Float @default(0)
-  brand String
-  model String
+  id          String        @id @default(uuid())
+  name        String
+  brand       String
+  model       String
   description String
-  image String?
-  category Categories[]
-  createAdt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  users User[] @relation("ProductUser")
+  image       String?
+  createAdt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  price       Float         @default(0)
+  ProductUser ProductUser[]
+  category    Categories[]
 
   @@map("product")
 }
 
 model Categories {
-  id String @id @default(uuid())
-  title String
+  id        String   @id @default(uuid())
+  title     String
   productId String?
-  product Product? @relation(fields: [productId], references: [id])
+  product   Product? @relation(fields: [productId], references: [id])
 
   @@map("categories")
 }
 
-
 model User {
-  id String   @id @default(uuid())
-  name String
-  email String   @unique
-  password String
-  createAdt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  products Product[] @relation("ProductUser")
+  id          String        @id @default(uuid())
+  name        String
+  email       String        @unique
+  password    String
+  createAdt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  ProductUser ProductUser[]
 }
 
-
 model Admin {
-  id String @id @default(uuid())
-  name String
-  email String @unique
-  password String
-  isAdmin Boolean
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  password  String
   createAdt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  isAdmin   Boolean
 
   @@map("admin")
 }
 
+model ProductUser {
+  A       String
+  B       String
+  product Product @relation(fields: [A], references: [id], onDelete: Cascade)
+  User    User    @relation(fields: [B], references: [id], onDelete: Cascade)
 
+  @@unique([A, B], map: "_ProductUser_AB_unique")
+  @@index([B], map: "_ProductUser_B_index")
+  @@map("_ProductUser")
+}
