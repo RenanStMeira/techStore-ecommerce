@@ -33,7 +33,7 @@ export class ProductController {
     const { id } = req.params;
   
     try {
-      const product = await prisma.product.findUnique({
+      const product = await prisma.product.findMany({
         where: {
           id: id,
         },
