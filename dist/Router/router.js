@@ -22,7 +22,7 @@ router.get('/admin/:id', adminController.listAdmin);
 router.post('/admin/create', adminController.createAdmin);
 router.delete('/admin/delete/:id', adminController.deleteAdmin);
 router.post('/admin/login', loginAdminController.loginAdmin);
-router.get('/product', productController.findAll);
+router.get('/product/:id', productController.findAll);
 router.post('/product/created', productController.create);
 router.delete('/product/created', productController.delete);
 router.post('/upload/image', uploadMulter.guard('uploads/image'), productController.upload);

@@ -42,7 +42,7 @@ class ProductController {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
             try {
-                const product = yield prisma.product.findUnique({
+                const product = yield prisma.product.findMany({
                     where: {
                         id: id,
                     },
