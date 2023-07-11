@@ -10,8 +10,7 @@ app.use(express_1.default.json());
 app.use(router_1.default);
 const port = process.env.PORT || 3000;
 
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
-});
+
+
 
 //# sourceMappingURL=server.js.map
