@@ -112,7 +112,7 @@ export class salesController{
             }
         } catch (error) {
             console.log(error)
-            return res.json(404).json({ message: 'Erro ao excluir usuario'})
+            return res.json(404).json({ message: 'Erro ao excluir usuario!'})
         }
     }
 }
