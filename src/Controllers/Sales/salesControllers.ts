@@ -7,7 +7,7 @@ export class salesController{
     async historySale(req: Request, res: Response){
         const {userId} = req.params
         try {
-            const all = await prisma.sales.findMany({where:{userId: userId}})
+            const all = await prisma.sales.findMany({where:{user_id: userId}})
             if(all){
                return res.status(201).json(all)
             } else{
@@ -19,22 +19,49 @@ export class salesController{
             res.status(404).json({message: 'Internal error'})
         }
     }
+
+    async findOne(req: Request, res: Response){
+        const {id} = req.body
+        try {
+            const one = await prisma.sales.findFirst({where:{id}})
+            if(one){
+               return res.status(200).json(one)
+            } else {
+                return res.status(404).json({ message: "Id inválido" })
+            }
+            
+
+        } catch (error) {
+            console.log(error)
+            res.status(404).json({message: 'Internal error'})
+        }
+    }
+
+    async findAll(req: Request, res: Response){
+        try {
+            const all = prisma.sales.findMany()
+            return res.status(200).json(all)
+        } catch (error) {
+            console.log(error)
+            res.status(404).json({message: 'Internal error'})
+        }
+    }
     
     async create(req: Request, res: Response){
-        const {userId, listProduct, amount } = req.body
+        const {user_id, product_id, amount } = req.body
         try {
             const newSale = await prisma.sales.create({
                 data: {
-                    userId,
+                    user_id,
                     amount
                 
                 }
             })
     
-            for(let productId of listProduct){
+            for(let productId of product_id){
                 await prisma.sales.update({
                     where: {id: newSale.id},
-                    data: {listProduct: {connect: {id: productId}}}
+                    data: {product_id: {connect: {id: productId}}}
                 })
             }
 
@@ -49,14 +76,14 @@ export class salesController{
 
     async updateSale(req: Request, res: Response){
         const {id} = req.params
-        const {listProduct, amount} = req.body
+        const {product_id, amount} = req.body
         try {
             const Sale = await prisma.sales.findFirst({where: {id}})
             if(Sale){
-                for(let productId of listProduct){
+                for(let productId of product_id){
                     await prisma.sales.update({
                         where: {id:id},
-                        data: {listProduct: {connect: {id: productId}},
+                        data: {product_id: {connect: {id: productId}},
                         amount
                     }
                     })

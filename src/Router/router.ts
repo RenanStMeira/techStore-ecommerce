@@ -55,7 +55,9 @@ router.post('/upload/image', uploadMulter.guard('uploads/image'), productControl
 
 //Rotas de Sales
 
+router.get('/sales', saleController.findAll) // Todas as sales
 router.get('/sales/:userId', saleController.historySale) //Histórico de compras do usuário
+router.get("/sales/:id", saleController.findOne) // Achar sale pelo id
 router.post('/sales/create', saleController.create)
 router.put('/sales/update/:id', saleController.updateSale)
 router.delete('/sales/delete/:id', saleController.deleteSale)

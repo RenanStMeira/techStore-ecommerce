@@ -17,7 +17,7 @@ class salesController {
         return __awaiter(this, void 0, void 0, function* () {
             const { userId } = req.params;
             try {
-                const all = yield prisma.sales.findMany({ where: { userId: userId } });
+                const all = yield prisma.sales.findMany({ where: { user_id: userId } });
                 if (all) {
                     return res.status(201).json(all);
                 }
@@ -31,20 +31,50 @@ class salesController {
             }
         });
     }
+    findOne(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id } = req.body;
+            try {
+                const one = yield prisma.sales.findFirst({ where: { id } });
+                if (one) {
+                    return res.status(200).json(one);
+                }
+                else {
+                    return res.status(404).json({ message: "Id inválido" });
+                }
+            }
+            catch (error) {
+                console.log(error);
+                res.status(404).json({ message: 'Internal error' });
+            }
+        });
+    }
+    findAll(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const all = prisma.sales.findMany();
+                return res.status(200).json(all);
+            }
+            catch (error) {
+                console.log(error);
+                res.status(404).json({ message: 'Internal error' });
+            }
+        });
+    }
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { userId, listProduct, amount } = req.body;
+            const { user_id, product_id, amount } = req.body;
             try {
                 const newSale = yield prisma.sales.create({
                     data: {
-                        userId,
+                        user_id,
                         amount
                     }
                 });
-                for (let productId of listProduct) {
+                for (let productId of product_id) {
                     yield prisma.sales.update({
                         where: { id: newSale.id },
-                        data: { listProduct: { connect: { id: productId } } }
+                        data: { product_id: { connect: { id: productId } } }
                     });
                 }
                 return res.status(201).json({ message: "Sale cadastrada com sucesso" });
@@ -58,14 +88,14 @@ class salesController {
     updateSale(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            const { listProduct, amount } = req.body;
+            const { product_id, amount } = req.body;
             try {
                 const Sale = yield prisma.sales.findFirst({ where: { id } });
                 if (Sale) {
-                    for (let productId of listProduct) {
+                    for (let productId of product_id) {
                         yield prisma.sales.update({
                             where: { id: id },
-                            data: { listProduct: { connect: { id: productId } },
+                            data: { product_id: { connect: { id: productId } },
                                 amount
                             }
                         });
