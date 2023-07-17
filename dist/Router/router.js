@@ -15,7 +15,7 @@ const loginUsercontroller = new authLoginUser_1.LoginController();
 const loginAdminController = new authLoginAdmin_1.LoginAdmincontroller();
 const uploadMulter = new uploadConfigCore_1.UploadMulter();
 const productController = new productController_1.ProductController();
-const saleController = new salesControllers_1.salesController();
+const saleController = new salesControllers_1.SalesController();
 router.get("/users/:id", userController.listUsers);
 router.post("/users/create", userController.createUser);
 router.delete('/users/delete/:id', userController.deleteUser);

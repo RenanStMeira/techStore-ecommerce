@@ -9,10 +9,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.salesController = void 0;
+exports.SalesController = void 0;
 const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
-class salesController {
+class SalesController {
     historySale(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { userId } = req.params;
@@ -132,5 +132,5 @@ class salesController {
         });
     }
 }
-exports.salesController = salesController;
+exports.SalesController = SalesController;
 //# sourceMappingURL=salesControllers.js.map

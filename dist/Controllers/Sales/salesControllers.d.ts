@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-export declare class salesController {
+export declare class SalesController {
     historySale(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
     findOne(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
     findAll(req: Request, res: Response): Promise<Response<any, Record<string, any>>>;
