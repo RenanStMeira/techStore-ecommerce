@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 
 const prisma = new PrismaClient()
 
-export class salesController{
+export class SalesController{
     async historySale(req: Request, res: Response){
         const {userId} = req.params
         try {

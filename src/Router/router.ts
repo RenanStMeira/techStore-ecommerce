@@ -5,7 +5,7 @@ import { LoginController } from "../Auth/LoginUsers/authLoginUser";
 import { LoginAdmincontroller } from "../Auth/LoginAdmin/authLoginAdmin";
 // import { PaymentController } from '../Service/ControllerPay/serviceControllerPay'
 import { ProductController } from "../Controllers/Products/productController";
-import { salesController } from "../Controllers/Sales/salesControllers";
+import { SalesController } from "../Controllers/Sales/salesControllers";
 import { UploadMulter } from "../Core/uploadConfigCore";
 
 const router = Router();
@@ -22,7 +22,7 @@ const uploadMulter = new UploadMulter();
 
 const productController = new ProductController();
 
-const saleController = new salesController()
+const saleController = new SalesController()
 
 // const paymentController = new PaymentController();
 
