@@ -19,6 +19,7 @@ model Product {
   price       Float         @default(0)
   ProductUser ProductUser[]
   category    Categories[]
+  Sales Sales[]
 
   @@map("product")
 }
@@ -40,6 +41,7 @@ model User {
   createAdt   DateTime      @default(now())
   updatedAt   DateTime      @updatedAt
   ProductUser ProductUser[]
+  Sales Sales[]
 }
 
 model Admin {
@@ -63,4 +65,12 @@ model ProductUser {
   @@unique([A, B], map: "_ProductUser_AB_unique")
   @@index([B], map: "_ProductUser_B_index")
   @@map("_ProductUser")
+}
+
+model Sales{
+  id        String   @id @default(uuid())
+  user User @relation(fields: [user_id], references: [id])
+  user_id String
+  product_id Product[]
+  amount Float?
 }

@@ -8,9 +8,15 @@ const router_1 = __importDefault(require("./Router/router"));
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
 app.use(router_1.default);
+<<<<<<< HEAD
 const port = process.env.PORT || 3000;
 
 
 
 
+=======
+app.listen(3000, () => {
+    console.log('Server running on port 3000');
+});
+>>>>>>> origin/main
 //# sourceMappingURL=server.js.map
