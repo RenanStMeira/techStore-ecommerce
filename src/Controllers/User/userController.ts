@@ -6,7 +6,7 @@ import bcrypt from 'bcrypt';
 const prisma = new PrismaClient();
 export class UserController {
     async createUser(req: Request, res: Response){
-        const { name, email, password } = req.body;
+        const { name, email, telephone, Adress, road, Zipcode, password } = req.body;
 
         // Criptografando a senha
         const hash = await bcrypt.hash(password, 10);
@@ -17,6 +17,10 @@ export class UserController {
                 data: {
                     name,
                     email,
+                    telephone,
+                    Adress,
+                    road,
+                    Zipcode,
                     password: hash,
                 },
             });
@@ -42,7 +46,7 @@ export class UserController {
                     id: id,
                 }
             });
-//
+
             if (users){
                 // Retornando o usuário encontrado
                return res.json(users);

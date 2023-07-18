@@ -38,10 +38,16 @@ model User {
   name        String
   email       String        @unique
   password    String
+  telephone   String
+  Adress      String
+  road        String
+  Zipcode     String
   createAdt   DateTime      @default(now())
   updatedAt   DateTime      @updatedAt
   ProductUser ProductUser[]
   Sales Sales[]
+
+  @@map("users")
 }
 
 model Admin {
