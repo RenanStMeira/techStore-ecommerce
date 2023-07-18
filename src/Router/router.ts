@@ -47,7 +47,7 @@ router.post('/admin/login',loginAdminController.loginAdmin);
 //Produtos
 router.get('/product/:id',productController.findAll);
 router.post('/product/created',productController.create);
-router.delete('/product/delete',productController.delete);
+router.delete('/product/delete/:id',productController.delete);
 
 
 //upload de imagens
