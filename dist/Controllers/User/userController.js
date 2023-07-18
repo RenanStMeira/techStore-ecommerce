@@ -30,13 +30,17 @@ const prisma = new client_1.PrismaClient();
 class UserController {
     createUser(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { name, email, password } = req.body;
+            const { name, email, contato, Adress, road, Zipcode, password } = req.body;
             const hash = yield bcrypt_1.default.hash(password, 10);
             try {
                 const newUser = yield prisma.user.create({
                     data: {
                         name,
                         email,
+                        contato,
+                        Adress,
+                        road,
+                        Zipcode,
                         password: hash,
                     },
                 });

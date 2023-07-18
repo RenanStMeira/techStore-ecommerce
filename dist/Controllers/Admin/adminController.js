@@ -45,7 +45,7 @@ class AdminController {
                     }
                 });
                 const { password: _ } = newAdmin, user = __rest(newAdmin, ["password"]);
-                res.status(201).json({ message: 'Admin criado com sucesso' });
+                return res.json(newAdmin);
             }
             catch (err) {
                 res.status(400).json({ message: `Você não tem autorização para criar este usuário` });
