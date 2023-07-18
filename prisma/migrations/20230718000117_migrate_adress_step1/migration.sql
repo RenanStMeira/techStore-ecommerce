@@ -19,7 +19,7 @@ CREATE TABLE "users" (
     "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
-    "telephone" TEXT NOT NULL,
+    "tel" TEXT NOT NULL,
     "Adress" TEXT NOT NULL,
     "road" TEXT NOT NULL,
     "Zipcode" TEXT NOT NULL,

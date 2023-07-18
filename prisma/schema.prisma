@@ -38,7 +38,7 @@ model User {
   name        String
   email       String        @unique
   password    String
-  telephone   String
+  tel         String?
   Adress      String
   road        String
   Zipcode     String
