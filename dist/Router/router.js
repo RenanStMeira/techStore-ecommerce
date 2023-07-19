@@ -1,5 +1,9 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+const cors_1 = __importDefault(require("cors"));
 const express_1 = require("express");
 const userController_1 = require("../Controllers/User/userController");
 const adminController_1 = require("../Controllers/Admin/adminController");
@@ -34,17 +38,11 @@ router.get("/sales/:id", saleController.findOne);
 router.post('/sales/create', saleController.create);
 router.put('/sales/update/:id', saleController.updateSale);
 router.delete('/sales/delete/:id', saleController.deleteSale);
-// router.use((req, res, next) => {
-//     res.setHeader('Access-Control-Allow-Origin', '*');
-//     next();
-// });
-
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-  });
-
-
+router.use((0, cors_1.default)({
+    origin: 'https://seu-front-end.com',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    preflightContinue: false,
+    optionsSuccessStatus: 204
+}));
 exports.default = router;
 //# sourceMappingURL=router.js.map

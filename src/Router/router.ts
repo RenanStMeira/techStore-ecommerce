@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import cors from 'cors'
 import { Router } from "express";
 import { UserController } from "../Controllers/User/userController";
 import { AdminController } from "../Controllers/Admin/adminController";
@@ -63,14 +64,15 @@ router.post('/sales/create', saleController.create)
 router.put('/sales/update/:id', saleController.updateSale)
 router.delete('/sales/delete/:id', saleController.deleteSale)
 
-
-router.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    next();
-  });
-
 //Pagamento Mercado Pago
 // router.post('/pay',paymentController.create);
+
+router.use(cors({
+    origin: 'https://seu-front-end.com', // Defina a origem permitida aqui
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    preflightContinue: false,
+    optionsSuccessStatus: 204
+  }));
 
 
 export default router;
