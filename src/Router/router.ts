@@ -67,12 +67,6 @@ router.delete('/sales/delete/:id', saleController.deleteSale)
 //Pagamento Mercado Pago
 // router.post('/pay',paymentController.create);
 
-router.use(cors({
-    origin: 'https://seu-front-end.com', // Defina a origem permitida aqui
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    preflightContinue: false,
-    optionsSuccessStatus: 204
-  }));
 
 
 export default router;
