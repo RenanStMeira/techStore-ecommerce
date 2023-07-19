@@ -68,7 +68,8 @@ class SalesController {
                 const newSale = yield prisma.sales.create({
                     data: {
                         user_id,
-                        amount
+                        product_id: product_id,
+                        amount: parseFloat(amount),
                     }
                 });
                 for (let productId of product_id) {

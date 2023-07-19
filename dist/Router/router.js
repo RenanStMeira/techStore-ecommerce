@@ -26,7 +26,7 @@ router.delete('/admin/delete/:id', adminController.deleteAdmin);
 router.post('/admin/login', loginAdminController.loginAdmin);
 router.get('/product/:id', productController.findAll);
 router.post('/product/created', productController.create);
-router.delete('/product/created', productController.delete);
+router.delete('/product/delete/:id', productController.delete);
 router.post('/upload/image', uploadMulter.guard('uploads/image'), productController.upload);
 router.get('/sales', saleController.findAll);
 router.get('/sales/:userId', saleController.historySale);
@@ -34,5 +34,9 @@ router.get("/sales/:id", saleController.findOne);
 router.post('/sales/create', saleController.create);
 router.put('/sales/update/:id', saleController.updateSale);
 router.delete('/sales/delete/:id', saleController.deleteSale);
+router.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    next();
+});
 exports.default = router;
 //# sourceMappingURL=router.js.map

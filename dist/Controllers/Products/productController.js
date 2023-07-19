@@ -69,7 +69,7 @@ class ProductController {
                         id: id
                     },
                 });
-                return res.status(200).json({ message: "Usuario excluido com sucesso " });
+                return res.status(200).json({ message: "Produto excluido com sucesso " });
             }
             catch (err) {
                 return res.json(400).json({ message: 'Erro ao excluir usuario', err });
