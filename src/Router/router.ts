@@ -1,5 +1,3 @@
-import { Request, Response } from "express";
-import cors from 'cors'
 import { Router } from "express";
 import { UserController } from "../Controllers/User/userController";
 import { AdminController } from "../Controllers/Admin/adminController";
