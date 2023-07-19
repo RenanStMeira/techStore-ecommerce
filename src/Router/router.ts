@@ -1,3 +1,4 @@
+import { Request, Response } from "express";
 import { Router } from "express";
 import { UserController } from "../Controllers/User/userController";
 import { AdminController } from "../Controllers/Admin/adminController";
@@ -61,6 +62,12 @@ router.get("/sales/:id", saleController.findOne) // Achar sale pelo id
 router.post('/sales/create', saleController.create)
 router.put('/sales/update/:id', saleController.updateSale)
 router.delete('/sales/delete/:id', saleController.deleteSale)
+
+
+router.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    next();
+  });
 
 //Pagamento Mercado Pago
 // router.post('/pay',paymentController.create);

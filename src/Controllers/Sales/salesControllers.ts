@@ -53,7 +53,8 @@ export class SalesController{
             const newSale = await prisma.sales.create({
                 data: {
                     user_id,
-                    amount
+                    product_id: product_id,
+                    amount: parseFloat(amount),
                 
                 }
             })
