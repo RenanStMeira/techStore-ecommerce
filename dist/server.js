@@ -12,6 +12,13 @@ const options = {
     origin: allowedOrigins
 };
 app.use((0, cors_1.default)(options));
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", '*');
+    res.header("Access-Control-Allow-Credentials", 'true');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
+    next();
+});
 app.use(express_1.default.json());
 app.use(router_1.default);
 app.listen(3000, () => {
