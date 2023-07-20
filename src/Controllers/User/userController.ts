@@ -41,7 +41,7 @@ export class UserController {
 
         try {
             // Buscando o usuário pelo ID no banco de dados
-            const users = await prisma.user.findUnique({
+            const users = await prisma.user.findMany({
                 where: {
                     id: id,
                 }
