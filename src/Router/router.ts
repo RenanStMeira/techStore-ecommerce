@@ -28,6 +28,7 @@ const saleController = new SalesController()
 
 
 //Rotas de Usuarios
+router.get("/users/", userController.listUsers);
 router.get("/users/:id", userController.listUsers);
 router.post("/users/create", userController.createUser);
 router.delete('/users/delete/:id', userController.deleteUser);
