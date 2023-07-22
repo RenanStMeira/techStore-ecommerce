@@ -49,6 +49,7 @@ router.post('/admin/login',loginAdminController.loginAdmin);
 router.get('/product/:id',productController.findAll);
 router.get('/product/',productController.findAll);
 router.post('/product/created',productController.create);
+router.put('product/update/:id', productController.updateProduct)
 router.delete('/product/delete/:id',productController.delete);
 
 
