@@ -71,4 +71,25 @@ export class AdminController {
             
         }
     }
+
+    async updateAdmin(req: Request, res: Response){
+        const { id } = req.params;
+        const { name, email, password } = req.body;
+
+        try{
+            const newAdminUpdate = await prisma.admin.update({
+                where: { id },
+                data: {
+                    name: name,
+                    email: email,
+                    password: password
+                },
+            })
+
+            return res.status(200).json({ message: "ADMIN atualizado com sucesso" });
+
+        } catch {
+            return res.status(400).json({ message: "Erro ao atualizar ADMIN" });
+        }
+    }
 }

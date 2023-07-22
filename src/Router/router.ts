@@ -31,6 +31,7 @@ const saleController = new SalesController()
 router.get("/users/", userController.listUsers);
 router.get("/users/:id", userController.listUsers);
 router.post("/users/create", userController.createUser);
+router.put('/user/update/:id', userController.updateUser);
 router.delete('/users/delete/:id', userController.deleteUser);
 
 //Login Usuarios
@@ -40,6 +41,7 @@ router.post('/users/login', loginUsercontroller.login);
 //Rotas de Admin
 router.get('/admin/:id', adminController.listAdmin);
 router.post('/admin/create',adminController.createAdmin);
+router.put('/admin/update/:id', adminController.updateAdmin);
 router.delete('/admin/delete/:id', adminController.deleteAdmin);
 
 //Login Admin
@@ -49,7 +51,7 @@ router.post('/admin/login',loginAdminController.loginAdmin);
 router.get('/product/:id',productController.findAll);
 router.get('/product/',productController.findAll);
 router.post('/product/created',productController.create);
-router.put('product/update/:id', productController.updateProduct)
+router.put('/product/update/:id', productController.updateProduct)
 router.delete('/product/delete/:id',productController.delete);
 
 

@@ -12,7 +12,6 @@ export class UserController {
         const hash = await bcrypt.hash(password, 10);
 
         try {
-          // Criando um novo usuário no banco de dados
           const newUser = await prisma.user.create({
                 data: {
                     name,
@@ -25,7 +24,6 @@ export class UserController {
                 },
             });
 
-            // Omitindo a senha do objeto de usuário
             const {password: _, ...user} = newUser;
 
             res.status(201).json({ message: 'Usuario criado com sucesso', user });
@@ -40,7 +38,6 @@ export class UserController {
         const { id } = req.params;
 
         try {
-            // Buscando o usuário pelo ID no banco de dados
             const users = await prisma.user.findMany({
                 where: {
                     id: id,
@@ -48,7 +45,6 @@ export class UserController {
             });
 
             if (users){
-                // Retornando o usuário encontrado
                return res.json(users);
 
             }else {
@@ -63,7 +59,6 @@ export class UserController {
         const { id } = req.params;
 
         try {
-            // Deletando o usuário pelo ID no banco de dados
             await prisma.user.delete({
                 where: {
                     id: String(id),
@@ -73,6 +68,30 @@ export class UserController {
            return res.status(200).json({ message: 'Usuario deletado com sucesso ' });
         } catch (err) {
             return res.status(400).json({ message: 'Erro ao deletar usuario' })
+        }
+     }
+
+     async updateUser(req: Request, res: Response){
+        const { id } = req.params;
+        const { name, email, password, contato, Adress, road, Zipcode } = req.body;
+
+        try{
+             const newUserUpdate = await prisma.user.update({
+            where: { id },
+            data: {
+                name: name,
+                email: email,
+                password: password,
+                contato: contato,
+                Adress: Adress,
+                Zipcode: Zipcode,
+                road: road
+            },
+        });
+        return res.status(200).json({ message: 'Ussuario atualizado com sucesso'});
+
+        } catch (err) { 
+        return res.status(400).json({ err: 'Erro ao atualizar usuario' });
         }
      }
 };
