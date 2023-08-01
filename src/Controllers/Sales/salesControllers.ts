@@ -39,7 +39,7 @@ export class SalesController{
 
     async findAll(req: Request, res: Response){
         try {
-            const all = prisma.sales.findMany()
+            const all = await prisma.sales.findMany()
             return res.status(200).json(all)
         } catch (error) {
             console.log(error)
