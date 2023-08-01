@@ -52,7 +52,7 @@ class SalesController {
     findAll(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const all = prisma.sales.findMany();
+                const all = await prisma.sales.findMany();
                 return res.status(200).json(all);
             }
             catch (error) {
