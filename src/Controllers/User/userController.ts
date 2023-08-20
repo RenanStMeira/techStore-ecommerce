@@ -1,44 +1,49 @@
 import { Request, Response } from "express";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from 'bcrypt';
-import  Jwt from "jsonwebtoken";
-import { generateToken } from "../../Utils/jwtUtils";
 
 
 const prisma = new PrismaClient();
 export class UserController {
     async createUser(req: Request, res: Response){
-        const { name, email, password } = req.body;
+        const { name, email, contato, Adress, road, Zipcode, password } = req.body;
 
         // Criptografando a senha
         const hash = await bcrypt.hash(password, 10);
 
         try {
-          // Criando um novo usuário no banco de dados
           const newUser = await prisma.user.create({
                 data: {
                     name,
                     email,
+                    contato,
+                    Adress,
+                    road,
+                    Zipcode,
                     password: hash,
                 },
                 
             });
 
-            // Omitindo a senha do objeto de usuário
             const {password: _, ...user} = newUser;
 
             
           return  res.status(201).json({ message: 'Usuario criado com sucesso', user });
 
         } catch (err) {
+<<<<<<< HEAD
 
           console.log(err)
           return  res.status(400).json({ message: 'Erro ao criar usuario' });
+=======
+            res.status(400).json({ message: 'Erro ao criar usuario' });
+>>>>>>> main
         }
      };
 
      async findAll(req: Request, res: Response) {
 
+<<<<<<< HEAD
       try {
         const users = await prisma.user.findMany();
         return res.status(200).json(users);
@@ -84,6 +89,26 @@ export class UserController {
         } catch (err) {
           console.error('Erro ao fazer login:', err);
           res.status(400).json({ message: 'Erro ao fazer login' });
+=======
+     async listUsers(req: Request, res: Response) {
+        const { id } = req.params;
+
+        try {
+            const users = await prisma.user.findMany({
+                where: {
+                    id: id,
+                }
+            });
+
+            if (users){
+               return res.json(users);
+
+            }else {
+               return res.status(404).json({ message: 'Usuario não encontrado' })
+            }
+               } catch {
+            res.status(400).json({ message: 'Erro no Servidor Interno' })
+>>>>>>> main
         }
       }
       
@@ -92,16 +117,43 @@ export class UserController {
         const { id } = req.params;
 
         try {
-            // Deletando o usuário pelo ID no banco de dados
             await prisma.user.delete({
                 where: {
                     id: String(id),
                 }
             });
 
-            res.status(200).json({ message: 'Usuario deletado com sucesso deleted succesfully' });
+           return res.status(200).json({ message: 'Usuario deletado com sucesso ' });
         } catch (err) {
+<<<<<<< HEAD
             res.status(400).json({ message: 'Erro ao deletar usuario' })
+=======
+            return res.status(400).json({ message: 'Erro ao deletar usuario' })
+        }
+     }
+
+     async updateUser(req: Request, res: Response){
+        const { id } = req.params;
+        const { name, email, password, contato, Adress, road, Zipcode } = req.body;
+
+        try{
+             const newUserUpdate = await prisma.user.update({
+            where: { id },
+            data: {
+                name: name,
+                email: email,
+                password: password,
+                contato: contato,
+                Adress: Adress,
+                Zipcode: Zipcode,
+                road: road
+            },
+        });
+        return res.status(200).json({ message: 'Ussuario atualizado com sucesso'});
+
+        } catch (err) { 
+        return res.status(400).json({ err: 'Erro ao atualizar usuario' });
+>>>>>>> main
         }
      }
 };
