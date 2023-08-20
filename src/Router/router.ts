@@ -1,15 +1,12 @@
 import { Router } from "express";
 import { UserController } from "../Controllers/User/userController";
 import { AdminController } from "../Controllers/Admin/adminController";
-<<<<<<< HEAD
-=======
 import { LoginController } from "../Auth/LoginUsers/authLoginUser";
 import { LoginAdmincontroller } from "../Auth/LoginAdmin/authLoginAdmin";
 // import { PaymentController } from '../Service/ControllerPay/serviceControllerPay'
 import { ProductController } from "../Controllers/Products/productController";
 import { SalesController } from "../Controllers/Sales/salesControllers";
 import { UploadMulter } from "../Core/uploadConfigCore";
->>>>>>> main
 
 const router = Router();
 
@@ -31,13 +28,8 @@ const saleController = new SalesController()
 
 
 //Rotas de Usuarios
-<<<<<<< HEAD
-// router.get("/users/:id", userController.);clear
-
-=======
 router.get("/users/", userController.listUsers);
 router.get("/users/:id", userController.listUsers);
->>>>>>> main
 router.post("/users/create", userController.createUser);
 router.put('/user/update/:id', userController.updateUser);
 router.delete('/users/delete/:id', userController.deleteUser);

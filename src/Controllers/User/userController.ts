@@ -22,74 +22,18 @@ export class UserController {
                     Zipcode,
                     password: hash,
                 },
-                
             });
 
             const {password: _, ...user} = newUser;
 
-            
-          return  res.status(201).json({ message: 'Usuario criado com sucesso', user });
+            res.status(201).json({ message: 'Usuario criado com sucesso', user });
 
         } catch (err) {
-<<<<<<< HEAD
-
-          console.log(err)
-          return  res.status(400).json({ message: 'Erro ao criar usuario' });
-=======
             res.status(400).json({ message: 'Erro ao criar usuario' });
->>>>>>> main
         }
      };
 
-     async findAll(req: Request, res: Response) {
 
-<<<<<<< HEAD
-      try {
-        const users = await prisma.user.findMany();
-        return res.status(200).json(users);
-
-      } catch (err) {
-
-        return res.status(400).json({ message: 'Erro ao buscar usuários' });
-      }
-    }
-  
-     async login(req: Request, res: Response) {
-        const { email, password } = req.body;
-      
-        try {
-          // Procurando o usuário no banco de dados
-          const user = await prisma.user.findUnique({
-            where: { email },
-          });
-      
-          if (!user) {
-            return res.status(404).json({ message: "Usuário não encontrado" });
-          }
-      
-          // Comparando a senha fornecida com a senha armazenada no banco de dados
-          const isPasswordValid = await bcrypt.compare(password, user.password);
-      
-          // Verificar se a senha é válida
-          if (!isPasswordValid) {
-            return res.status(401).json({ message: 'Senha incorreta' });
-          }
-      
-          // Gerar o token JWT com base no ID do usuário
-          const token = generateToken({ id: user.id });
-      
-          // Remover a senha do objeto do usuário
-          const userWithoutPassword = { ...user };
-          delete userWithoutPassword.password;
-      
-          return res.json({
-            user: userWithoutPassword,
-            token: token,
-          });
-        } catch (err) {
-          console.error('Erro ao fazer login:', err);
-          res.status(400).json({ message: 'Erro ao fazer login' });
-=======
      async listUsers(req: Request, res: Response) {
         const { id } = req.params;
 
@@ -108,10 +52,8 @@ export class UserController {
             }
                } catch {
             res.status(400).json({ message: 'Erro no Servidor Interno' })
->>>>>>> main
         }
-      }
-      
+     };
 
      async deleteUser(req: Request, res: Response){
         const { id } = req.params;
@@ -125,9 +67,6 @@ export class UserController {
 
            return res.status(200).json({ message: 'Usuario deletado com sucesso ' });
         } catch (err) {
-<<<<<<< HEAD
-            res.status(400).json({ message: 'Erro ao deletar usuario' })
-=======
             return res.status(400).json({ message: 'Erro ao deletar usuario' })
         }
      }
@@ -153,7 +92,6 @@ export class UserController {
 
         } catch (err) { 
         return res.status(400).json({ err: 'Erro ao atualizar usuario' });
->>>>>>> main
         }
      }
 };
