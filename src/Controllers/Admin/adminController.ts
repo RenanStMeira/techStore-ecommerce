@@ -91,7 +91,7 @@ export class AdminController {
           });
       
           if (admin) {
-            return res.json(admin);
+            return res.status(201).json(admin);
           }
         } catch (error) {
           console.log(error);

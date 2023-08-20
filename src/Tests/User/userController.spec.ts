@@ -12,6 +12,7 @@ describe('UserController', () => {
 
   beforeEach(() => {
     userController = new UserController();
+    
     req = {} as Request;
     res = {
       status: jest.fn().mockReturnThis(),
@@ -19,7 +20,7 @@ describe('UserController', () => {
     } as unknown as Response;
   });
 
-  test("should return a user", () => {
+  it("should return a user", () => {
     const user = {
       name: 'renan',
       email: "",

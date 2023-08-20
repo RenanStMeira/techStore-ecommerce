@@ -33,7 +33,7 @@ export class UserController {
         } catch (err) {
 
           console.log(err)
-            res.status(400).json({ message: 'Erro ao criar usuario' });
+          return  res.status(400).json({ message: 'Erro ao criar usuario' });
         }
      };
 
