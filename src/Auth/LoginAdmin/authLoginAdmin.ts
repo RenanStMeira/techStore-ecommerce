@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import bcrypt from 'bcrypt';
 import  Jwt from "jsonwebtoken";
-import { generateToken } from "../../Utils/jwtUtils";
+import { generateToken } from "../../Middlewares/jwtUtils";
 import { prisma } from "../../Service/Prisma/prismaService";
 
 export class LoginAdmincontroller {
@@ -45,7 +45,7 @@ export class LoginAdmincontroller {
 
     } catch (error) {
       console.error('Erro ao fazer login do admin:', error);
-      res.status(500).json({ message: 'Erro ao fazer login do admin' });
+      res.status(401).json({ message: 'Erro ao fazer login do admin' });
     }
   }
 }
