@@ -5,7 +5,6 @@ import { mock } from "ts-mockito";
 
 const prismaMock = mock(PrismaClient);
 
-
 describe('Admincontroller', () => {
     let adminController: AdminController;
     let req: Request;
@@ -13,27 +12,32 @@ describe('Admincontroller', () => {
 
     beforeEach(() => {
         adminController = new AdminController();
-        req = {} as Request;
+        req = {
+            params: {
+                id: 'b0cdf861-a1d9-469f-b3bb-abee63513e31' // Simulando o parâmetro ID
+            }
+        } as unknown as Request;
         res = {
             status: jest.fn().mockReturnThis(),
             json: jest.fn(),
         } as unknown as Response;
-});
+    });
 
-test ('should return a admin', () => {
-    const admin = {
-        name: 'Meira',
-        email: '',
-        createdAt: new Date(),
-        updatedAt: new Date()
-    };
+    test ('should return a admin', () => {
+        const admin = {
+            id: 'b0cdf861-a1d9-469f-b3bb-abee63513e31',
+            name: 'Meira',
+            email: '',
+            createdAt: new Date(),
+            updatedAt: new Date()
+        };
 
-    const adminMock = jest.fn().mockResolvedValue(admin);
+        const adminMock = jest.fn().mockResolvedValue(admin);
 
-    res.json = adminMock;
+        res.json = adminMock;
 
-    adminController.listAdmin(req, res);
+        adminController.listAdmin(req, res);
 
-    expect(res.json).toBe(adminMock);
-});
+        expect(res.json).toBe(adminMock);
+    });
 });

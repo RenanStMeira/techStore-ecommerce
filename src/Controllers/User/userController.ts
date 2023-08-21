@@ -12,7 +12,7 @@ export class UserController {
         const hash = await bcrypt.hash(password, 10);
 
         try {
-          const newUser = await prisma.user.create({
+          const newUser = await prisma.clint.create({
                 data: {
                     name,
                     email,
@@ -38,7 +38,7 @@ export class UserController {
         const { id } = req.params;
 
         try {
-            const users = await prisma.user.findMany({
+            const users = await prisma.clint.findMany({
                 where: {
                     id: id,
                 }
@@ -59,7 +59,7 @@ export class UserController {
         const { id } = req.params;
 
         try {
-            await prisma.user.delete({
+            await prisma.clint.delete({
                 where: {
                     id: String(id),
                 }
@@ -76,7 +76,7 @@ export class UserController {
         const { name, email, password, contato, Adress, road, Zipcode } = req.body;
 
         try{
-             const newUserUpdate = await prisma.user.update({
+             const newUserUpdate = await prisma.clint.update({
             where: { id },
             data: {
                 name: name,

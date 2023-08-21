@@ -8,18 +8,18 @@ datasource db {
 }
 
 model Product {
-  id          String        @id @default(uuid())
-  name        String
-  brand       String
-  model       String
-  description String
-  image       String?
-  createAdt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
-  price       Float         @default(0)
-  ProductUser ProductUser[]
-  category    Categories[]
-  Sales Sales[]
+  id             String           @id @default(uuid())
+  name           String
+  brand          String
+  model          String
+  description    String
+  image          String?
+  createAdt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  price          Float            @default(0)
+  ProductToSales ProductToSales[]
+  category       Categories[]
+  users          Clint[]          @relation("ProductUser")
 
   @@map("product")
 }
@@ -33,19 +33,19 @@ model Categories {
   @@map("categories")
 }
 
-model User {
-  id          String        @id @default(uuid())
-  name        String
-  email       String        @unique
-  password    String
-  contato     String
-  Adress      String
-  road        String
-  Zipcode     String
-  createAdt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
-  ProductUser ProductUser[]
-  Sales Sales[]
+model Clint {
+  id        String    @id @default(uuid())
+  name      String
+  email     String    @unique
+  password  String
+  contato   String
+  Adress    String
+  road      String
+  Zipcode   String
+  createAdt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  Sales     Sales[]
+  product   Product[] @relation("ProductUser")
 
   @@map("users")
 }
@@ -62,21 +62,21 @@ model Admin {
   @@map("admin")
 }
 
-model ProductUser {
+model Sales {
+  id             String           @id @default(uuid())
+  amount         Float?
+  user_id        String
+  user           Clint            @relation(fields: [user_id], references: [id])
+  ProductToSales ProductToSales[]
+}
+
+model ProductToSales {
   A       String
   B       String
   product Product @relation(fields: [A], references: [id], onDelete: Cascade)
-  User    User    @relation(fields: [B], references: [id], onDelete: Cascade)
+  Sales   Sales   @relation(fields: [B], references: [id], onDelete: Cascade)
 
-  @@unique([A, B], map: "_ProductUser_AB_unique")
-  @@index([B], map: "_ProductUser_B_index")
-  @@map("_ProductUser")
-}
-
-model Sales{
-  id        String   @id @default(uuid())
-  user User @relation(fields: [user_id], references: [id])
-  user_id String
-  product_id Product[]
-  amount Float?
+  @@unique([A, B], map: "_ProductToSales_AB_unique")
+  @@index([B], map: "_ProductToSales_B_index")
+  @@map("_ProductToSales")
 }

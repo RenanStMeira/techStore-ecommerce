@@ -6,5 +6,6 @@
 
 */
 -- AlterTable
-ALTER TABLE "users" DROP COLUMN "tel",
-ADD COLUMN     "contato" TEXT NOT NULL;
+ALTER TABLE "users"
+ALTER COLUMN "contato" SET NOT NULL,
+ALTER COLUMN "contato" SET DEFAULT '';

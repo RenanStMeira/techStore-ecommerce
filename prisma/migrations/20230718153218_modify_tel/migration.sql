@@ -5,4 +5,4 @@
 
 */
 -- AlterTable
-ALTER TABLE "users" ALTER COLUMN "tel" SET NOT NULL;
+ALTER TABLE "users" ALTER COLUMN "contato" SET NOT NULL;
