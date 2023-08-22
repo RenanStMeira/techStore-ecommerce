@@ -3,7 +3,7 @@ import { UserController } from "../Controllers/User/userController";
 import { AdminController } from "../Controllers/Admin/adminController";
 import { LoginController } from "../Auth/LoginUsers/authLoginUser";
 import { LoginAdmincontroller } from "../Auth/LoginAdmin/authLoginAdmin";
-// import { PaymentController } from '../Service/ControllerPay/serviceControllerPay'
+import { PaymentController } from '../Service/ControllerPay/serviceControllerPay'
 import { ProductController } from "../Controllers/Products/productController";
 import { UploadMulter } from "../Core/uploadConfigCore";
 
@@ -21,7 +21,7 @@ const uploadMulter = new UploadMulter();
 
 const productController = new ProductController();
 
-// const paymentController = new PaymentController();
+const paymentController = new PaymentController();
 
 
 //Rotas de Usuarios
@@ -51,7 +51,7 @@ router.delete('/product/created',productController.delete);
 router.post('/upload/image', uploadMulter.guard('uploads/image'), productController.upload);
 
 //Pagamento Mercado Pago
-// router.post('/pay',paymentController.create);
+router.post('/pay',paymentController.create);
 
 
 export default router;
